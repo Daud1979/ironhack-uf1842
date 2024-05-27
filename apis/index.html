@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub User Info</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+     <script src="script.js"></script>
 </head>
 
 <body>
@@ -13,7 +14,8 @@
         <div>
             <label for="username">Enter GitHub username:</label>
             <input type="text" id="username" name="username">
-            <button>Get Info</button>
+            <label id="notfound" style="color: red; display: none;">User not found</label>
+            <button id="btn_info" >Get Info</button>
         </div>
         <table>
             <thead>
@@ -34,6 +36,48 @@
             </tbody>
         </table>
     </main>
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() 
+    {
+        const notfound=document.getElementById('notfound');
+        const btn = document.getElementById('btn_info');
+        const fullName= document.getElementById('fullName');
+        const bio = document.getElementById('bio');
+        const profilePicture =document.getElementById('profilePicture');
+        const homeUrl = document.getElementById('homeUrl');
+        btn.addEventListener('click',async ()=>{
+            const user = document.getElementById('username');
+            try{
+            const response = await fetch('https://api.github.com/users/'+user.value );
+                if (!response.ok) {
+                    fullName.innerHTML="";
+                    bio.innerHTML=""
+                    profilePicture.src="";
+                    homeUrl.innerHTML="";
+                    notfound.style.display='block';
+                    
+                }
+                else{
+                    notfound.style.display='none';
+                    const data =await response.json();
+                    fullName.innerHTML=data.name;
+                    bio.innerHTML=data.bio;
+                    profilePicture.src=data.avatar_url;
+                    homeUrl.innerHTML=`<a href=${data.html_url}>${data.html_url}</>`;
+                    }
+            } catch (error)
+            {
+                alert('Error: ' + error.message);
+            }
+        });  
+    });
+
+
+
+
+
+</script>
 </body>
 
 </html>
