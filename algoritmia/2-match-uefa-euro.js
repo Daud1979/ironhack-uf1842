@@ -8,7 +8,22 @@
  * @returns {string} Resultado del partido, siguiendo el formato indicado en los comentarios, según si ha ganado el primer equipo, el segundo, o ha habido empate.   
 */
 function uefaEuro2016(teams, scores) {
-
+   
+    if (scores[0]>scores[1])
+    {
+        const  result=`Al match ${teams[0]} - ${teams[1]}, ${teams[0]} won!`;
+        return  result;
+    }
+    else if (scores[0]<scores[1])
+    {
+        const  result=`Al match ${teams[0]} - ${teams[1]}, ${teams[1]} won!`;
+        return  result;
+    }
+    else if (scores[0]===scores[1])
+    {
+        const  result=`Al match ${teams[0]} - ${teams[1]}, teams played draw.!`;
+        return  result;
+    }
 }
 
 console.log(uefaEuro2016(['Germany', 'Ukraine'], [2, 0])) // "At match Germany - Ukraine, Germany won!"

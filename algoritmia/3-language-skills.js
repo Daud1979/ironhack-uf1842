@@ -12,7 +12,7 @@
  */
 
 function filterProgrammingLanguages(languages, minYears) {
-
+//mostrar los lenguajes mayorres a los años foreach 
 }
 
 // Caso 1: Candidata con suficientes años de experiencia en algunos lenguajes
