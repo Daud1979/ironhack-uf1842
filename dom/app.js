@@ -10,8 +10,10 @@ calculate.addEventListener('click', function(){
    {
         let per =  (bill_amount.value*percentage_tip.value)/100;
         let suma = Number(bill_amount.value) + per;
-        tip_amount.value =per.toFixed(2);
-        total.value=suma.toFixed(2); 
+        tip_amount.type='text';
+        tip_amount.value ='€'.concat(' ', per.toFixed(2));
+        total.type='text';
+        total.value='€'.concat(' ',suma.toFixed(2)); 
    }
    else
    {
